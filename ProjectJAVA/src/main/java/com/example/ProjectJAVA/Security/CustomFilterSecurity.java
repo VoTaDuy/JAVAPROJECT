@@ -40,7 +40,7 @@ public class CustomFilterSecurity {
                                 "/user/**",
                                 "/login/sign_in/**",
                                 "/login/Sign_up/**",
-                                "/category/get",
+                                "/category/get/**",
                                 "/category/create/**",
                                 "/category/delete/**")
                         .permitAll()

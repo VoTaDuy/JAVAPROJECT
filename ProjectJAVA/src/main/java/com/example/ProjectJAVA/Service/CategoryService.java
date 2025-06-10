@@ -31,6 +31,12 @@ public class CategoryService implements CategoryServiceImp {
     }
 
     @Override
+    public Categories getCategoryById(int category_id){
+        return categoryRepository.findById(category_id)
+                .orElseThrow(() -> new RuntimeException("can't not found Category By Id: " + category_id));
+    }
+
+    @Override
     public Boolean checkCreateCategory(CategoryRequest categoryRequest) {
         if (categoryRepository.findCategoryByName(categoryRequest.getCategory_name()) != null) {
             System.out.println("Category already exist!!! try another name");

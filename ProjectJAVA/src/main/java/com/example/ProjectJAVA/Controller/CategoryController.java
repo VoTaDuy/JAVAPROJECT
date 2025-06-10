@@ -42,6 +42,14 @@ public class CategoryController {
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
+    @GetMapping("/get/{category_id}")
+    public ResponseEntity getCategoryById(@PathVariable int category_id){
+        ResponseData responseData = new ResponseData();
+        Categories categories = categoryServiceImp.getCategoryById(category_id);
+        responseData.setData(categories);
+        return new ResponseEntity(responseData, HttpStatus.OK);
+    }
+
     @DeleteMapping("delete/{category_id}")
     public ResponseEntity<?> removeCategory(@PathVariable Integer category_id){
         ResponseData responseData = new ResponseData();
@@ -58,12 +66,10 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/update/{category_id}")
-    public ResponseEntity<?> updateCategory(@PathVariable Integer category_id, @RequestBody CategoryRequest categoryRequest){
-        ResponseData responseData = new ResponseData();
 
-
-
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
-    }
+//    @PutMapping("/update/{category_id}")
+//    public ResponseEntity<?> updateCategory(@PathVariable Integer category_id, @RequestBody CategoryRequest categoryRequest){
+//        ResponseData responseData = new ResponseData();
+//        return new ResponseEntity<>(responseData, HttpStatus.OK);
+//    }
 }

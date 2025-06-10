@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CategoryServiceImp {
     public List<CategoryDTO> categoryList();
+
+    public Categories getCategoryById(int category_id);
     public Boolean checkCreateCategory(CategoryRequest categoryRequest);
 
     public Categories removeCategoryById(int id);
