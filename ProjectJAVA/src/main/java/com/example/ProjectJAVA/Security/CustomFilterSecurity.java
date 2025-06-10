@@ -42,7 +42,9 @@ public class CustomFilterSecurity {
                                 "/login/Sign_up/**",
                                 "/category/get/**",
                                 "/category/create/**",
-                                "/category/delete/**")
+                                "/category/delete/**",
+                                "/product/get",
+                                "/product/get/{product_id}")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
