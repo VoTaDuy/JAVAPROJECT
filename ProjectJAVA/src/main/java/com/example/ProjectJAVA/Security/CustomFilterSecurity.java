@@ -44,7 +44,9 @@ public class CustomFilterSecurity {
                                 "/category/create/**",
                                 "/category/delete/**",
                                 "/product/get",
-                                "/product/get/{product_id}")
+                                "/product/get/{product_id}",
+                                "/product/create",
+                                "/product/file/{filename:.+}")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

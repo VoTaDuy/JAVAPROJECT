@@ -3,6 +3,7 @@ package com.example.ProjectJAVA.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity(name = "products")
 public class Products {
