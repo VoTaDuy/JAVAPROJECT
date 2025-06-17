@@ -5,11 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Entity(name = "products")
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int product_id;
+    private int productId;
 
     @Column(name = "product_name")
     private String product_name;
@@ -27,17 +29,39 @@ public class Products {
     @Column(name = "quantity")
     private int quantity;
 
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    private List<CartItems> cartItemsList;
+
+    public List<CartItems> getCartItemsList() {
+        return cartItemsList;
+    }
+
+    public void setCartItemsList(List<CartItems> cartItemsList) {
+        this.cartItemsList = cartItemsList;
+    }
+
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    private List<OrderProduct> orderProductList;
+
+    public List<OrderProduct> getOrderProductList() {
+        return orderProductList;
+    }
+
+    public void setOrderProductList(List<OrderProduct> orderProductList) {
+        this.orderProductList = orderProductList;
+    }
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Categories categories;
 
-    public int getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getProduct_name() {

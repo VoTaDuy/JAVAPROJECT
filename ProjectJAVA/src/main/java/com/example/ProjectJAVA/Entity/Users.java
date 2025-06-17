@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "users")
 public class Users {
@@ -20,11 +21,32 @@ public class Users {
     @Column(name = "created_Date")
     private Date created_Date;
 
+    @OneToMany(mappedBy = "users")
+    private List<Orders> orders;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Roles roles;
 
+    @OneToMany(mappedBy = "users")
+    private List<Carts> cartsList;
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
+    public List<Carts> getCartsList() {
+        return cartsList;
+    }
+
+    public void setCartsList(List<Carts> cartsList) {
+        this.cartsList = cartsList;
+    }
 
     public long getUser_id() {
         return user_id;

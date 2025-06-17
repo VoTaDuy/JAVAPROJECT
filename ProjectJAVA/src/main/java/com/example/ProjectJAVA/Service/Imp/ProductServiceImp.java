@@ -13,4 +13,6 @@ public interface ProductServiceImp {
     Products getProductById(int product_id);
 
     Boolean createProduct(MultipartFile file, String product_name, String description, int quantity, int price, int category_id);
+
+
 }
