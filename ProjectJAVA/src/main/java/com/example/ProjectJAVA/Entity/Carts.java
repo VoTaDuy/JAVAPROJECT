@@ -2,7 +2,11 @@ package com.example.ProjectJAVA.Entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "carts")
@@ -12,7 +16,11 @@ public class Carts {
     private int id;
 
     @Column(name = "added_date")
-    private String addedDate;
+    private Timestamp addedDate;
+
+
+    @Column(name = "total_amount")
+    private BigDecimal totalAmount = BigDecimal.ZERO;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
@@ -26,14 +34,6 @@ public class Carts {
         this.id = id;
     }
 
-    public String getAddedDate() {
-        return addedDate;
-    }
-
-    public void setAddedDate(String addedDate) {
-        this.addedDate = addedDate;
-    }
-
     public Users getUsers() {
         return users;
     }
@@ -42,18 +42,62 @@ public class Carts {
         this.users = users;
     }
 
-    public List<CartItems> getCartItemsList() {
-        return cartItemsList;
+
+
+    @OneToMany(mappedBy = "carts", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItems> cartItems = new HashSet<>();
+
+
+    public Set<CartItems> getCartItems() {
+        return cartItems;
     }
 
-    public void setCartItemsList(List<CartItems> cartItemsList) {
-        this.cartItemsList = cartItemsList;
+    public void setCartItems(Set<CartItems> cartItems) {
+        this.cartItems = cartItems;
     }
 
-    @OneToMany(mappedBy = "carts")
-    private List<CartItems> cartItemsList;
+    public Timestamp getAddedDate() {
+        return addedDate;
+    }
 
+    public void setAddedDate(Timestamp addedDate) {
+        this.addedDate = addedDate;
+    }
 
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
 
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.addedDate = new Timestamp(System.currentTimeMillis());
+    }
+
+    //update totalAmount
+    private void updateTotalAmount() {
+        this.totalAmount = cartItems.stream()
+                .map(cartItem -> {
+                    BigDecimal itemPrice = cartItem.getUnitPrice();
+                    return (itemPrice != null) ? itemPrice.multiply(new BigDecimal(cartItem.getQuantity())) : BigDecimal.ZERO;
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    //add item to carts
+    public void addItem(CartItems cartItem) {
+        cartItems.add(cartItem);
+        cartItem.setCarts(this);
+        updateTotalAmount();
+    }
+    //remove item from cart
+    public void removeItem(CartItems cartItem) {
+        cartItems.remove(cartItem);
+        cartItem.setCarts(null);
+        updateTotalAmount();
+    }
 
 }

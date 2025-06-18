@@ -3,12 +3,14 @@ package com.example.ProjectJAVA.Entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "cart_items")
 public class CartItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -21,11 +23,19 @@ public class CartItems {
     @Column(name = "quantity")
     private int quantity;
 
-    public int getId() {
+    @Column(name = "unit_price")
+    private BigDecimal unitPrice = BigDecimal.ZERO;
+
+    @Column(name = "total_price")
+    private BigDecimal totalPrice = BigDecimal.ZERO;
+
+
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,5 +61,22 @@ public class CartItems {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public void setTotalPrice() {
+        this.totalPrice = this.unitPrice.multiply(BigDecimal.valueOf(quantity)) ;
+    }
+
+    public BigDecimal setUnitPrice(BigDecimal unitPrice) {
+        return this.unitPrice = products.getPrice();
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 }

@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -59,7 +61,7 @@ public class ProductController {
                                            @RequestParam String product_name,
                                            @RequestParam String description,
                                            @RequestParam int quantity,
-                                           @RequestParam int price,
+                                           @RequestParam BigDecimal price,
                                            @RequestParam int category_id){
 
         ResponseData responseData = new ResponseData();

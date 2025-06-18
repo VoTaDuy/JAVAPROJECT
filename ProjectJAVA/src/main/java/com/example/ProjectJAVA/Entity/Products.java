@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity(name = "products")
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    private Integer productId;
 
     @Column(name = "product_name")
     private String product_name;
@@ -24,7 +25,7 @@ public class Products {
 
 
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
     @Column(name = "quantity")
     private int quantity;
@@ -56,11 +57,11 @@ public class Products {
     @JoinColumn(name = "category_id")
     private Categories categories;
 
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -88,11 +89,11 @@ public class Products {
         this.product_image = product_image;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

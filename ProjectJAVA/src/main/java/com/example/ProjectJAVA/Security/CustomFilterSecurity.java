@@ -46,7 +46,13 @@ public class CustomFilterSecurity {
                                 "/product/get",
                                 "/product/get/{product_id}",
                                 "/product/create",
-                                "/product/file/{filename:.+}")
+                                "/product/file/{filename:.+}",
+                                "/cart/get/{id}/my-cart",
+                                "/cart/delete/{id}/my-cart",
+                                "/cart/{id}/cart/total-price",
+                                "cartItem/add/**",
+                                "cartItem/{id}/remove/{itemId}",
+                                "cartItem/cart/{id}/{itemId}/update/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

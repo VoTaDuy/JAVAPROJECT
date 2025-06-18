@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class ProductService implements ProductServiceImp {
                                  String product_name,
                                  String description,
                                  int quantity,
-                                 int price, int category_id) {
+                                 BigDecimal price, int category_id) {
         boolean isCreateSuccess = false;
 
         try {
