@@ -4,7 +4,9 @@ package com.example.ProjectJAVA.Entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -18,19 +20,20 @@ public class Orders {
     @JoinColumn(name = "user_id")
     private Users users;
 
-
     @Column(name = "order_date")
     private Date orderDate;
 
-    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
-    private List<OrderProduct> orderProductList;
 
-    public List<OrderProduct> getOrderProductList() {
-        return orderProductList;
+
+    @OneToMany(mappedBy = "orders")
+    Set<OrderItems> orderItemsSet = new HashSet<>();
+
+    public Set<OrderItems> getOrderItemsSet() {
+        return orderItemsSet;
     }
 
-    public void setOrderProductList(List<OrderProduct> orderProductList) {
-        this.orderProductList = orderProductList;
+    public void setOrderItemsSet(Set<OrderItems> orderItemsSet) {
+        this.orderItemsSet = orderItemsSet;
     }
 
     public int getOrderId() {

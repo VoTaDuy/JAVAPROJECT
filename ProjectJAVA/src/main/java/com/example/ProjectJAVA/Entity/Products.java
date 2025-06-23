@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "products")
 public class Products {
@@ -41,21 +43,22 @@ public class Products {
         this.cartItemsList = cartItemsList;
     }
 
-    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
-    private List<OrderProduct> orderProductList;
-
-    public List<OrderProduct> getOrderProductList() {
-        return orderProductList;
-    }
-
-    public void setOrderProductList(List<OrderProduct> orderProductList) {
-        this.orderProductList = orderProductList;
-    }
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Categories categories;
+
+
+    public Set<OrderItems> getOrderItemsSet() {
+        return orderItemsSet;
+    }
+
+    public void setOrderItemsSet(Set<OrderItems> orderItemsSet) {
+        this.orderItemsSet = orderItemsSet;
+    }
+
+    @OneToMany(mappedBy = "products")
+    Set<OrderItems> orderItemsSet = new HashSet<>();
 
     public Integer getProductId() {
         return productId;

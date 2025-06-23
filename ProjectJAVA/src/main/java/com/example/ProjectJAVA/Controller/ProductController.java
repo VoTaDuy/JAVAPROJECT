@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/product")
 public class ProductController {

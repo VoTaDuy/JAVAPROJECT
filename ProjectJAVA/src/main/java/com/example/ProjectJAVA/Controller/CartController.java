@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/cart")
 public class CartController {

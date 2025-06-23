@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
