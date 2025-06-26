@@ -2,6 +2,7 @@ package com.example.ProjectJAVA.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +34,7 @@ public class Products {
     private int quantity;
 
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<CartItems> cartItemsList;
 
     public List<CartItems> getCartItemsList() {

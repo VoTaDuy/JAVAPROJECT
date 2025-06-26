@@ -2,15 +2,18 @@ package com.example.ProjectJAVA.Controller;
 
 
 import com.example.ProjectJAVA.Entity.Carts;
+import com.example.ProjectJAVA.Entity.Users;
 import com.example.ProjectJAVA.Exception.ResourceNotFoundException;
 import com.example.ProjectJAVA.Payloads.ResponseData;
 import com.example.ProjectJAVA.Service.Imp.CartServiceImp;
+import com.example.ProjectJAVA.Service.Imp.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @CrossOrigin("*")
@@ -21,6 +24,9 @@ public class CartController {
 
     @Autowired
     CartServiceImp cartServiceImp;
+
+    @Autowired
+    UserServiceImp userServiceImp;
 
     @GetMapping("/get/{id}/my-cart")
     public ResponseEntity<?> getCart(@PathVariable Integer id){
@@ -65,5 +71,17 @@ public class CartController {
             responseData.setDesc(e.getMessage());
             return new ResponseEntity<>(responseData,HttpStatus.NOT_FOUND);
         }
+    }
+    @PostMapping("/create")
+    public ResponseEntity<?> createCartForUser(@RequestParam Integer userId) {
+        Users user = userServiceImp.findUserById(userId);
+        Carts cart = cartServiceImp.createCartForUser(user);
+        return new ResponseEntity<>(cart, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getCartByUserId(@PathVariable Integer userId) {
+        List<Carts> carts = cartServiceImp.getAllCarts();
+        return new ResponseEntity<>(carts, HttpStatus.OK);
     }
 }

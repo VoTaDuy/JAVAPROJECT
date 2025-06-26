@@ -1,8 +1,13 @@
 package com.example.ProjectJAVA.Entity;
 
 
+import com.example.ProjectJAVA.Enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -20,12 +25,35 @@ public class Orders {
     @JoinColumn(name = "user_id")
     private Users users;
 
-    @Column(name = "order_date")
-    private Date orderDate;
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
 
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    @Column(name = "order_date")
+    private LocalDate orderDate;
+
+    @Column(name = "total_amount")
+    private BigDecimal totalAmount = BigDecimal.ZERO;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "order_status")
+    private OrderStatus status = OrderStatus.PENDING;
 
 
     @OneToMany(mappedBy = "orders")
+    @JsonManagedReference
     Set<OrderItems> orderItemsSet = new HashSet<>();
 
     public Set<OrderItems> getOrderItemsSet() {
@@ -52,11 +80,11 @@ public class Orders {
         this.users = users;
     }
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 }

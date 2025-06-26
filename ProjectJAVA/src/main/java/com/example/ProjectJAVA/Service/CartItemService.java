@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 
 
 @Service
@@ -35,6 +36,12 @@ public class CartItemService implements CartItemServiceImp {
     public void addItemToCart(int cart_id, int product_id, int quantity) {
         Carts carts = cartServiceImp.getCartById(cart_id);
         Products products = productServiceImp.getProductById(product_id);
+        // Initialize cart items if null
+        if (carts.getCartItems() == null) {
+            carts.setCartItems(new HashSet<>());
+        }
+
+
         CartItems cartItems = carts.getCartItems()
                 .stream()
                 .filter(item -> item.getProducts().getProductId().equals(product_id))

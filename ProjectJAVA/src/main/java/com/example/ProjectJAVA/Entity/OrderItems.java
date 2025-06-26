@@ -1,17 +1,19 @@
 package com.example.ProjectJAVA.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "orderItems")
+@Table(name = "order_items")
 public class OrderItems {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    private int id;
 
     @Column(name = "quantity")
     private int quantity;
@@ -25,6 +27,7 @@ public class OrderItems {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Orders orders;
 
     public OrderItems(int quantity, BigDecimal price, Products products, Orders orders) {
@@ -34,12 +37,12 @@ public class OrderItems {
         this.orders = orders;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getQuantity() {

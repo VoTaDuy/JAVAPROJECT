@@ -24,7 +24,7 @@ public class UserService implements UserServiceImp {
         List<UserDTO> userDTOList = new ArrayList<>();
         for (Users users : usersList){
             UserDTO userDTO = new UserDTO();
-            userDTO.setId(users.getUser_id());
+            userDTO.setId(users.getId());
             userDTO.setRole_id(users.getRoles().getRole_id());
             userDTO.setPassword(users.getPassword());
             userDTO.setUsername(users.getUsername());

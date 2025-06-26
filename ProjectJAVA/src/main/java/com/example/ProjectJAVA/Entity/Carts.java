@@ -1,5 +1,7 @@
 package com.example.ProjectJAVA.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -23,7 +25,8 @@ public class Carts {
     private BigDecimal totalAmount = BigDecimal.ZERO;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", unique = true)
+    @JsonManagedReference
     private Users users;
 
     public int getId() {
@@ -44,9 +47,9 @@ public class Carts {
 
 
 
-    @OneToMany(mappedBy = "carts", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CartItems> cartItems = new HashSet<>();
-
+    @OneToMany(mappedBy = "carts", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<CartItems> cartItems;
 
     public Set<CartItems> getCartItems() {
         return cartItems;

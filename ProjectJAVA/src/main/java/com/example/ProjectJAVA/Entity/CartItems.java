@@ -1,6 +1,8 @@
 package com.example.ProjectJAVA.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -18,6 +20,8 @@ public class CartItems {
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
+    @JsonBackReference
+
     private Carts carts;
 
     @Column(name = "quantity")

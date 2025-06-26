@@ -9,7 +9,6 @@ import com.example.ProjectJAVA.Service.Imp.LoginServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,5 +73,14 @@ public class LoginService implements LoginServiceImp {
         }
 
 
+    }
+    @Override
+    public Users checkAdminLogin(String username, String password) {
+        Users user = CheckLogin(username, password);
+        if (user != null && user.getRoles().getRolename().equalsIgnoreCase("ADMIN")) {
+            return user; // Trả về user nếu là admin
+        }
+        System.out.println("User is not an admin");
+        return null; // Trả về null nếu không phải admin
     }
 }

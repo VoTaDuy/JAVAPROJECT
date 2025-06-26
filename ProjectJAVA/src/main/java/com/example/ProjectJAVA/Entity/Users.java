@@ -1,16 +1,20 @@
 package com.example.ProjectJAVA.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    @Column(name = "user_id")
+    private Integer id;
 
     @Column(name = "username")
     private String username;
@@ -30,7 +34,8 @@ public class Users {
     private Roles roles;
 
     @OneToMany(mappedBy = "users")
-    private List<Carts> cartsList;
+    @JsonBackReference
+    private Set<Carts> cartsList;
 
     public List<Orders> getOrders() {
         return orders;
@@ -40,20 +45,20 @@ public class Users {
         this.orders = orders;
     }
 
-    public List<Carts> getCartsList() {
+    public Set<Carts> getCartsList() {
         return cartsList;
     }
 
-    public void setCartsList(List<Carts> cartsList) {
+    public void setCartsList(Set<Carts> cartsList) {
         this.cartsList = cartsList;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {

@@ -12,4 +12,5 @@ public interface LoginServiceImp  {
 
     public boolean RegisterUser(RegisterRequest registerRequest);
 
+    Users checkAdminLogin(String username, String password);
 }

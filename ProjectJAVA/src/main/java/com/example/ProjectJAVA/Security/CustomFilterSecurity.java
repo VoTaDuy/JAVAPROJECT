@@ -40,6 +40,7 @@ public class CustomFilterSecurity {
                                 "/user/**",
                                 "/login/sign_in/**",
                                 "/login/Sign_up/**",
+                                "/login/admin/sign_in/**",
                                 "/category/get/**",
                                 "/category/create/**",
                                 "/category/delete/**",
@@ -50,9 +51,14 @@ public class CustomFilterSecurity {
                                 "/cart/get/{id}/my-cart",
                                 "/cart/delete/{id}/my-cart",
                                 "/cart/{id}/cart/total-price",
+                                "/cart/create/**",
+                                "/cart/user/{userId}",
                                 "cartItem/add/**",
                                 "cartItem/{id}/remove/{itemId}",
-                                "cartItem/cart/{id}/{itemId}/update/**")
+                                "cartItem/cart/{id}/{itemId}/update/**",
+                                "order/create/**",
+                                "order/get/{orderId}",
+                                "order/{userId}/get")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
