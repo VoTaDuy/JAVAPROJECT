@@ -31,9 +31,11 @@ public class LoginController {
         if (users != null){
             String token = jwtUtilHelper.generateToken(users.getPassword());
             Map<String,Object> data = new HashMap<>();
+            boolean isDeleted = users.isDeleted();
             data.put("userId" , users.getId());
             data.put("username", users.getUsername());
             data.put("token", token);
+            data.put("is_deleted", isDeleted);
             responseData.setData(data);
             responseData.setSuccess(true);
         }else {
@@ -74,6 +76,7 @@ public class LoginController {
             data.put("adminId", admin.getId());
             data.put("username", admin.getUsername());
             data.put("token", token);
+
 
             responseData.setData(data);
             responseData.setSuccess(true);

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -69,6 +70,22 @@ public class OrderService implements OrderServiceImp {
                 .map(this::convertToDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with ID: " + orderId));
     }
+
+    @Override
+    public List<OrderDTO> getAllOrders() {
+        List<Orders> ordersList = orderRepository.findAll();
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        for (Orders orders : ordersList){
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setOrderId(orders.getOrderId());
+            orderDTO.setOrderTime(orders.getOrderDate());
+            orderDTO.setStatus(orders.getStatus());
+            orderDTO.setTotalAmount(orders.getTotalAmount());
+            orderDTOList.add(orderDTO);
+        }
+        return orderDTOList;
+    }
+
     private List<OrderItems> createOrderItem(Orders orders, Carts carts){
         return carts.getCartItems()
                 .stream()

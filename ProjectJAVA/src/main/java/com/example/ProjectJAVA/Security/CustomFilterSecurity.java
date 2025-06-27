@@ -60,6 +60,7 @@ public class CustomFilterSecurity {
                                 "order/create/**",
                                 "order/get/{orderId}",
                                 "order/{userId}/get",
+                                "order/get",
                                 "payment/fake/**")
                         .permitAll()
                         .anyRequest().authenticated())

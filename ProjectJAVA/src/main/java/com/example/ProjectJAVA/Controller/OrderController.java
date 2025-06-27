@@ -22,6 +22,17 @@ public class OrderController {
     @Autowired
     OrderServiceImp orderServiceImp;
 
+
+    @GetMapping("/get")
+    public ResponseEntity<?> getAllOrder(){
+        try {
+            List<OrderDTO> orderDTOList = orderServiceImp.getAllOrders();
+            return new ResponseEntity<>(orderDTOList, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createOrder(@RequestParam Integer userId)  {
 

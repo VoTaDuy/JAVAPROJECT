@@ -10,5 +10,7 @@ public interface OrderServiceImp {
 
     OrderDTO getOrder(Integer orderId);
 
+    List<OrderDTO> getAllOrders();
+
     public List<OrderDTO> getUserOrders(Integer userId);
 }
