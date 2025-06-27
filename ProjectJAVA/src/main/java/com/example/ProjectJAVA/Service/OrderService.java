@@ -9,6 +9,7 @@ import com.example.ProjectJAVA.Enums.OrderStatus;
 import com.example.ProjectJAVA.Exception.ResourceNotFoundException;
 import com.example.ProjectJAVA.Repository.OrderRepository;
 import com.example.ProjectJAVA.Repository.ProductRepository;
+import com.example.ProjectJAVA.Repository.UserRepository;
 import com.example.ProjectJAVA.Service.Imp.CartServiceImp;
 import com.example.ProjectJAVA.Service.Imp.OrderServiceImp;
 import org.aspectj.weaver.ast.Or;
@@ -33,6 +34,8 @@ public class OrderService implements OrderServiceImp {
     OrderRepository orderRepository;
 
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     CartServiceImp cartServiceImp;
 
     @Autowired
@@ -44,7 +47,7 @@ public class OrderService implements OrderServiceImp {
         Orders orders = createOrder(carts);
 
         List<OrderItems> orderItemsList = createOrderItem(orders, carts);
-
+        orders.setUsers(userRepository.findById(userId).orElseThrow(()-> new RuntimeException("User not found" + userId)));
         orders.setOrderItemsSet(new HashSet<>(orderItemsList));
         orders.setTotalAmount(calculateTotalAmount(orderItemsList));
         Orders savedOrder = orderRepository.save(orders);

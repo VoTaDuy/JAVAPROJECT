@@ -57,6 +57,10 @@ public class Orders {
     @JsonManagedReference
     private Set<OrderItems> orderItemsSet = new HashSet<>();
 
+    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Payments payment;
+
     public Set<OrderItems> getOrderItemsSet() {
         return orderItemsSet;
     }
@@ -87,5 +91,13 @@ public class Orders {
 
     public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public Payments getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payments payment) {
+        this.payment = payment;
     }
 }

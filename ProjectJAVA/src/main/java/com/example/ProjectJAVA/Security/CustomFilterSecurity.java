@@ -58,7 +58,8 @@ public class CustomFilterSecurity {
                                 "cartItem/cart/{id}/{itemId}/update/**",
                                 "order/create/**",
                                 "order/get/{orderId}",
-                                "order/{userId}/get")
+                                "order/{userId}/get",
+                                "payment/fake/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
