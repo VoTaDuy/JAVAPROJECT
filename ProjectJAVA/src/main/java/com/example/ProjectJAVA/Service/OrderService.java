@@ -78,6 +78,7 @@ public class OrderService implements OrderServiceImp {
         for (Orders orders : ordersList){
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setOrderId(orders.getOrderId());
+            orderDTO.setUsername(orders.getUsers().getUsername());
             orderDTO.setOrderTime(orders.getOrderDate());
             orderDTO.setStatus(orders.getStatus());
             orderDTO.setTotalAmount(orders.getTotalAmount());
