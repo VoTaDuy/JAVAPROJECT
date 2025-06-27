@@ -2,6 +2,7 @@ package com.example.ProjectJAVA.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -26,6 +27,7 @@ public class Users {
     private Date created_Date;
 
     @OneToMany(mappedBy = "users")
+    @JsonManagedReference
     private List<Orders> orders;
 
     @JsonIgnore

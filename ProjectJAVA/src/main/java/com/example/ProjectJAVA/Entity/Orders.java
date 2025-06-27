@@ -23,6 +23,7 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private Users users;
 
     public BigDecimal getTotalAmount() {
@@ -52,9 +53,9 @@ public class Orders {
     private OrderStatus status = OrderStatus.PENDING;
 
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    Set<OrderItems> orderItemsSet = new HashSet<>();
+    private Set<OrderItems> orderItemsSet = new HashSet<>();
 
     public Set<OrderItems> getOrderItemsSet() {
         return orderItemsSet;

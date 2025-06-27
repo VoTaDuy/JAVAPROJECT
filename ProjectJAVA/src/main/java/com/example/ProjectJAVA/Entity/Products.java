@@ -60,6 +60,7 @@ public class Products {
     }
 
     @OneToMany(mappedBy = "products")
+    @JsonManagedReference
     Set<OrderItems> orderItemsSet = new HashSet<>();
 
     public Integer getProductId() {

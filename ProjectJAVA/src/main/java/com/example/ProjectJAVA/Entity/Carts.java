@@ -25,7 +25,7 @@ public class Carts {
     private BigDecimal totalAmount = BigDecimal.ZERO;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", unique = true)
+    @JoinColumn(name = "user_id")
     @JsonManagedReference
     private Users users;
 

@@ -23,13 +23,15 @@ public class OrderItems {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonBackReference
     private Products products;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
     @JsonBackReference
     private Orders orders;
-
+    public OrderItems() {
+    }
     public OrderItems(int quantity, BigDecimal price, Products products, Orders orders) {
         this.quantity = quantity;
         this.price = price;
