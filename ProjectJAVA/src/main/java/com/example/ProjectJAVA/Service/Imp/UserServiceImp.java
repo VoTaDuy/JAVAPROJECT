@@ -9,4 +9,6 @@ public interface UserServiceImp {
     List<UserDTO> getAllUsers();
     Users findUserById(long id);
 
+
+    Users removeUserById(Integer id);
 }

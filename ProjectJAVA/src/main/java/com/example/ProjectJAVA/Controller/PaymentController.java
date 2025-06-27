@@ -42,9 +42,6 @@ public class PaymentController {
         orders.setStatus(OrderStatus.COMPLETED);
         orderRepository.save(orders);
         responseData.setData(orders);
-
-
-
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 

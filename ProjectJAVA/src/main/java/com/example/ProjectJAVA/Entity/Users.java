@@ -23,8 +23,19 @@ public class Users {
     @Column(name = "password")
     private String password;
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     @Column(name = "created_Date")
     private Date created_Date;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
 
     @OneToMany(mappedBy = "users")
     @JsonManagedReference

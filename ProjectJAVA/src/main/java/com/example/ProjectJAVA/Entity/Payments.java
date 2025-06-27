@@ -1,6 +1,7 @@
 package com.example.ProjectJAVA.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class Payments {
     private Integer id;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Orders orders;
     @Column(name = "payment_method")
     private String paymentMethod;

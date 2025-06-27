@@ -38,6 +38,7 @@ public class CustomFilterSecurity {
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers(
                                 "/user/**",
+                                "/user/{userId}/delete_user",
                                 "/login/sign_in/**",
                                 "/login/Sign_up/**",
                                 "/login/admin/sign_in/**",
