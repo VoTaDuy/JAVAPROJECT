@@ -4,6 +4,7 @@ import com.example.ProjectJAVA.DTO.CategoryDTO;
 import com.example.ProjectJAVA.DTO.ProductDTO;
 import com.example.ProjectJAVA.Entity.Categories;
 import com.example.ProjectJAVA.Entity.Products;
+import com.example.ProjectJAVA.Payloads.Request.ProductRequest;
 import com.example.ProjectJAVA.Repository.CategoryRepository;
 import com.example.ProjectJAVA.Repository.ProductRepository;
 import com.example.ProjectJAVA.Service.Imp.FileServiceImp;
@@ -82,6 +83,37 @@ public class ProductService implements ProductServiceImp {
             return false;
         }
         return isCreateSuccess;
+    }
+
+    @Override
+    public Products updateProduct(ProductRequest productRequest, int product_id) {
+        Products products = getProductById(product_id);
+
+
+        products.setProduct_name(productRequest.getProduct_name());
+        products.setDescription(productRequest.getDescription());
+        products.setPrice(productRequest.getPrice());
+        products.setQuantity(productRequest.getQuantity());
+        productRepository.save(products);
+
+        return products;
+    }
+
+
+    @Override
+    public Products updateProductQuantity(int product_id, int quantity) {
+        Products products = getProductById(product_id);
+        products.setQuantity(quantity);
+        productRepository.save(products);
+        return products;
+    }
+
+    @Override
+    public Products removeProductById(int product_id) {
+        Products products = getProductById(product_id);
+        products.setDeleted(true);
+        productRepository.save(products);
+        return products;
     }
 
 

@@ -69,7 +69,7 @@ public class LoginService implements LoginServiceImp {
             return true;
         }catch (Exception e){
             e.printStackTrace();
-            return false; // if register fail
+            return false;
         }
 
 
@@ -78,9 +78,9 @@ public class LoginService implements LoginServiceImp {
     public Users checkAdminLogin(String username, String password) {
         Users user = CheckLogin(username, password);
         if (user != null && user.getRoles().getRolename().equalsIgnoreCase("ADMIN")) {
-            return user; // Trả về user nếu là admin
+            return user;
         }
         System.out.println("User is not an admin");
-        return null; // Trả về null nếu không phải admin
+        return null;
     }
 }

@@ -33,6 +33,9 @@ public class Products {
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
+
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CartItems> cartItemsList;
@@ -117,5 +120,13 @@ public class Products {
 
     public void setCategories(Categories categories) {
         this.categories = categories;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }
