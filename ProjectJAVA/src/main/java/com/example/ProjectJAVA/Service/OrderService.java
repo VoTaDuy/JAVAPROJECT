@@ -7,6 +7,7 @@ import com.example.ProjectJAVA.Entity.Orders;
 import com.example.ProjectJAVA.Entity.Products;
 import com.example.ProjectJAVA.Enums.OrderStatus;
 import com.example.ProjectJAVA.Exception.ResourceNotFoundException;
+import com.example.ProjectJAVA.Repository.CartRepository;
 import com.example.ProjectJAVA.Repository.OrderRepository;
 import com.example.ProjectJAVA.Repository.ProductRepository;
 import com.example.ProjectJAVA.Repository.UserRepository;
@@ -35,6 +36,9 @@ public class OrderService implements OrderServiceImp {
     OrderRepository orderRepository;
 
     @Autowired
+    CartRepository cartRepository;
+
+    @Autowired
     UserRepository userRepository;
     @Autowired
     CartServiceImp cartServiceImp;
@@ -54,6 +58,8 @@ public class OrderService implements OrderServiceImp {
         Orders savedOrder = orderRepository.save(orders);
 
         cartServiceImp.ClearCart(carts.getId());
+        carts.setTotalAmount(BigDecimal.ZERO);
+        cartRepository.save(carts);
 
         return savedOrder;
     }
