@@ -66,6 +66,9 @@ public class Products {
     @JsonManagedReference
     Set<OrderItems> orderItemsSet = new HashSet<>();
 
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Reviews> reviewsSet = new HashSet<>();
     public Integer getProductId() {
         return productId;
     }
@@ -128,5 +131,13 @@ public class Products {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public Set<Reviews> getReviewsSet() {
+        return reviewsSet;
+    }
+
+    public void setReviewsSet(Set<Reviews> reviewsSet) {
+        this.reviewsSet = reviewsSet;
     }
 }

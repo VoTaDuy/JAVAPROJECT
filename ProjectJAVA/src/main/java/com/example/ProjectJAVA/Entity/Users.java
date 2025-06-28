@@ -23,6 +23,10 @@ public class Users {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Reviews> reviewsSet = new HashSet<>();
+
     public boolean isDeleted() {
         return isDeleted;
     }
@@ -104,5 +108,13 @@ public class Users {
 
     public void setRoles(Roles roles) {
         this.roles = roles;
+    }
+
+    public Set<Reviews> getReviewsSet() {
+        return reviewsSet;
+    }
+
+    public void setReviewsSet(Set<Reviews> reviewsSet) {
+        this.reviewsSet = reviewsSet;
     }
 }
