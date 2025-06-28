@@ -10,4 +10,6 @@ public interface ReviewServiceImp {
 
     List<ReviewDTO> getReviewByProductId(Integer productId);
 
+    List<ReviewDTO> getAllReviews();
+
 }

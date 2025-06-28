@@ -66,7 +66,8 @@ public class CustomFilterSecurity {
                                 "order/get",
                                 "payment/fake/**",
                                 "review/create/**",
-                                "review/get/{productId}")
+                                "review/get/{productId}",
+                                "review/get/all")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

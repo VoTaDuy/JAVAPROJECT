@@ -54,5 +54,21 @@ public class ReviewService implements ReviewServiceImp {
         return reviewDTOList;
     }
 
+    @Override
+    public List<ReviewDTO> getAllReviews() {
+        List<Reviews> reviewsList = reviewRepository.findAll();
+        List<ReviewDTO> reviewDTOList = new ArrayList<>();
+        for (Reviews reviews : reviewsList){
+            ReviewDTO reviewDTO = new ReviewDTO();
+            reviewDTO.setId(reviews.getId());
+            reviewDTO.setReviewDate(reviews.getReviewDate());
+            reviewDTO.setComment(reviews.getComment());
+            reviewDTO.setUserId(reviews.getUsers().getId());
+            reviewDTO.setProductId(reviews.getProducts().getProductId());
+            reviewDTOList.add(reviewDTO);
+        }
+        return reviewDTOList;
+    }
+
 
 }
