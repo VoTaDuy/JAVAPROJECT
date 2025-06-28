@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +37,7 @@ public class Users {
     }
 
     @Column(name = "created_Date")
-    private Date created_Date;
+    private LocalDateTime created_Date;
 
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
@@ -94,11 +95,11 @@ public class Users {
         this.password = password;
     }
 
-    public Date getCreated_Date() {
+    public LocalDateTime getCreated_Date() {
         return created_Date;
     }
 
-    public void setCreated_Date(Date created_Date) {
+    public void setCreated_Date(LocalDateTime created_Date) {
         this.created_Date = created_Date;
     }
 

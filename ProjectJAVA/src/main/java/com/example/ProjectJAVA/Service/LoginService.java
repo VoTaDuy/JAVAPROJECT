@@ -9,6 +9,7 @@ import com.example.ProjectJAVA.Service.Imp.LoginServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,7 @@ public class LoginService implements LoginServiceImp {
         Users users = new Users();
         users.setUsername(registerRequest.getUsername());
         users.setPassword(registerRequest.getPassword());
+        users.setCreated_Date(LocalDateTime.now());
         Roles roles = new Roles();
         roles.setRole_id(registerRequest.getRole_id());
         users.setRoles(roles);

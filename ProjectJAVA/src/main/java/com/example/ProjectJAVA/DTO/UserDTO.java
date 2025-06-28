@@ -1,5 +1,6 @@
 package com.example.ProjectJAVA.DTO;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class UserDTO {
@@ -7,7 +8,7 @@ public class UserDTO {
     private String username;
     private long role_id;
     private String password;
-    private Date created_Dated;
+    private LocalDateTime created_Dated;
 
     public long getId() {
         return id;
@@ -41,11 +42,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public Date getCreated_Dated() {
+    public LocalDateTime getCreated_Dated() {
         return created_Dated;
     }
 
-    public void setCreated_Dated(Date created_Dated) {
+    public void setCreated_Dated(LocalDateTime created_Dated) {
         this.created_Dated = created_Dated;
     }
 }

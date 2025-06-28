@@ -33,6 +33,7 @@ public class ProductService implements ProductServiceImp {
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (Products products : productsList){
             ProductDTO productDTO = new ProductDTO();
+            productDTO.setDeleted(products.isDeleted());
             productDTO.setProduct_id(products.getProductId());
             productDTO.setProduct_name(products.getProduct_name());
             productDTO.setProduct_image(products.getProduct_image());

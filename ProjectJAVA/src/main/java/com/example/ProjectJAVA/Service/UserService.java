@@ -33,6 +33,7 @@ public class UserService implements UserServiceImp {
             userDTO.setRole_id(users.getRoles().getRole_id());
             userDTO.setPassword(users.getPassword());
             userDTO.setUsername(users.getUsername());
+            userDTO.setCreated_Dated(users.getCreated_Date());
             userDTOList.add(userDTO);
             System.out.println(users.getUsername());
         }

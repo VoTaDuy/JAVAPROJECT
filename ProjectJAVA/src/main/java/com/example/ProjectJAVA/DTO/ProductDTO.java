@@ -17,6 +17,8 @@ public class ProductDTO {
 
     private int quantity;
 
+    private boolean isDeleted;
+
     public Integer getProduct_id() {
         return product_id;
     }
@@ -71,5 +73,13 @@ public class ProductDTO {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }
