@@ -1,15 +1,12 @@
 package com.example.ProjectJAVA.Service;
 
-import com.example.ProjectJAVA.DTO.CategoryDTO;
 import com.example.ProjectJAVA.DTO.ProductDTO;
 import com.example.ProjectJAVA.Entity.Categories;
 import com.example.ProjectJAVA.Entity.Products;
-import com.example.ProjectJAVA.Payloads.Request.ProductRequest;
 import com.example.ProjectJAVA.Repository.CategoryRepository;
 import com.example.ProjectJAVA.Repository.ProductRepository;
 import com.example.ProjectJAVA.Service.Imp.FileServiceImp;
 import com.example.ProjectJAVA.Service.Imp.ProductServiceImp;
-import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,17 +83,29 @@ public class ProductService implements ProductServiceImp {
     }
 
     @Override
-    public Products updateProduct(ProductRequest productRequest, int product_id) {
-        Products products = getProductById(product_id);
+    public Boolean updateProduct(MultipartFile file, String product_name, String description, int quantity, BigDecimal price,int product_id) {
 
+        boolean isCreateSuccess = false;
 
-        products.setProduct_name(productRequest.getProduct_name());
-        products.setDescription(productRequest.getDescription());
-        products.setPrice(productRequest.getPrice());
-        products.setQuantity(productRequest.getQuantity());
-        productRepository.save(products);
+        try {
+            boolean isSaveFileSuccess = fileServiceImp.saveFile(file);
+            if (isSaveFileSuccess) {
+                Products products = getProductById(product_id);
+                products.setProduct_name(product_name);
+                products.setDescription(description);
+                products.setProduct_image(file.getOriginalFilename());
+                products.setPrice(price);
+                products.setQuantity(quantity);
+                productRepository.save(products);
+                isCreateSuccess = true;
+            }
 
-        return products;
+        } catch (Exception e) {
+            System.out.println("Error" + e.getMessage());
+            return false;
+        }
+
+        return isCreateSuccess;
     }
 
 

@@ -1,9 +1,7 @@
 package com.example.ProjectJAVA.Controller;
 
 
-import com.example.ProjectJAVA.Entity.Categories;
 import com.example.ProjectJAVA.Entity.Products;
-import com.example.ProjectJAVA.Payloads.Request.ProductRequest;
 import com.example.ProjectJAVA.Payloads.ResponseData;
 import com.example.ProjectJAVA.Service.Imp.FileServiceImp;
 import com.example.ProjectJAVA.Service.Imp.ProductServiceImp;
@@ -77,11 +75,16 @@ public class ProductController {
     }
 
     @PutMapping("/update/{product_id}/full")
-    public ResponseEntity<?> updateProduct(@RequestBody ProductRequest productRequest, @PathVariable Integer product_id){
+    public ResponseEntity<?> updateProduct(@RequestParam MultipartFile file,
+                                           @RequestParam String product_name,
+                                           @RequestParam String description,
+                                           @RequestParam int quantity,
+                                           @RequestParam BigDecimal price,
+                                           @PathVariable Integer product_id){
         ResponseData responseData = new ResponseData();
         try {
 
-            Products products = productServiceImp.updateProduct(productRequest,product_id);
+            boolean products = productServiceImp.updateProduct(file,product_name, description, quantity, price, product_id);
             responseData.setDesc("Update product successfully!");
             responseData.setData(products);
             return new ResponseEntity<>(responseData, HttpStatus.OK);
